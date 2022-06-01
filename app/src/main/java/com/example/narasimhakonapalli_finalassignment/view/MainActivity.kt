@@ -1,9 +1,11 @@
-package com.example.narasimhakonapalli_finalassignment
+package com.example.narasimhakonapalli_finalassignment.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager.widget.ViewPager
+import com.example.narasimhakonapalli_finalassignment.R
 import com.example.narasimhakonapalli_finalassignment.databinding.ActivityMainBinding
+import com.example.narasimhakonapalli_finalassignment.viewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 
 class MainActivity : AppCompatActivity() {
