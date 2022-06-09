@@ -1,60 +1,122 @@
 package com.example.narasimhakonapalli_finalassignment.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.narasimhakonapalli_finalassignment.R
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.example.narasimhakonapalli_finalassignment.Request.Service
+import com.example.narasimhakonapalli_finalassignment.Response.MovieResponse
+import com.example.narasimhakonapalli_finalassignment.Response.MovieSearchResponse
+import com.example.narasimhakonapalli_finalassignment.databinding.FragmentSearchBinding
+import com.example.narasimhakonapalli_finalassignment.models.MovieModel
+import com.example.narasimhakonapalli_finalassignment.utils.Credentials
+import com.example.narasimhakonapalli_finalassignment.utils.MovieApi
+import com.example.narasimhakonapalli_finalassignment.viewModels.MovieListViewModel
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.io.IOException
+import java.util.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SearchFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SearchFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    private var _binding: FragmentSearchBinding? = null
+    private val binding: FragmentSearchBinding get() = _binding!!
+
+
+    //ViewModel
+    private val viewModel: MovieListViewModel by lazy {
+        object : ViewModelProvider.Factory{
+            override fun <T: ViewModel> create(modelClass: Class<T>):T{
+                return MovieListViewModel() as T
+            }
+        }.create(MovieListViewModel::class.java)
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false)
+        _binding = FragmentSearchBinding.inflate(layoutInflater)
+
+        binding.searchButton.setOnClickListener {
+            getRetrofitResponseToID()
+        }
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SearchFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SearchFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    //observing any data change
+    private fun observeAnyChange(){
+        viewModel.movies.observe(viewLifecycleOwner){ response ->
+
+        }
+    }
+
+    private fun getRetrofitResponse() {
+        val movieApi = Service.movieApi
+        val responseCall = movieApi.searchMovie(Credentials.API_KEY, "Minions", "1")
+        responseCall.enqueue(object : Callback<MovieSearchResponse> {
+            override fun onResponse(
+                call: Call<MovieSearchResponse>,
+                response: Response<MovieSearchResponse>
+            ) {
+                if (response.isSuccessful) {
+                    Log.v("Tag", "The response " + response.body().toString())
+
+                    val movies: List<MovieModel> = ArrayList(response.body()!!.movies)
+                    for (movie in movies) {
+                        Log.v("Tag", "The release date " + movie.title)
+                    }
+                } else {
+                    try {
+                        Log.v("Tag", "Error" + response.errorBody()!!.string())
+                    } catch (e: IOException) {
+                        e.printStackTrace()
+                    }
                 }
             }
+
+            override fun onFailure(call: Call<MovieSearchResponse>, t: Throwable) {}
+        }
+        )
+    }
+
+    private fun getRetrofitResponseToID() {
+        val movieApi = Service.movieApi
+        val responseCall = movieApi.getMovie(343611, Credentials.API_KEY)
+        responseCall.enqueue(object : Callback<MovieModel> {
+            override fun onResponse(call: Call<MovieModel>, response: Response<MovieModel>) {
+                if (response.isSuccessful) {
+                    Log.v("Tag", "The response " + response.body()?.title)
+
+                } else {
+                    try {
+                        Log.v("Tag", "Error" + response.errorBody()!!.string())
+                    } catch (e: IOException) {
+                        e.printStackTrace()
+                    }
+                }
+
+                }
+
+            override fun onFailure(call: Call<MovieModel>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        }
+        )
+
+
     }
 }
+
+
+
+

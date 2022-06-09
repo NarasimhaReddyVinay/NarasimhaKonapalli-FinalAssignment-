@@ -4,6 +4,9 @@ import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.example.narasimhakonapalli_finalassignment.view.FavouriteFragment
+import com.example.narasimhakonapalli_finalassignment.view.HomeFragment
+import com.example.narasimhakonapalli_finalassignment.view.SearchFragment
 
 
 class viewPagerAdapter(private val context: Context, fm: FragmentManager): FragmentPagerAdapter(fm) {
