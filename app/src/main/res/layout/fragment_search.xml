@@ -4,31 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.SearchFragment">
+    tools:context=".view.search.SearchFragment">
 
 
-    <EditText
-        android:id="@+id/editText"
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchMovie"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_margin="20dp"
         android:layout_marginTop="76dp"
+        app:queryHint="Search"
         android:background="@android:drawable/editbox_background"
         android:imeOptions="actionSearch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/searchButton"
-        android:layout_width="55dp"
-        android:layout_height="40dp"
-        android:src="@drawable/ic_baseline_search_24"
-        app:layout_constraintBottom_toBottomOf="@+id/editText"
-        app:layout_constraintEnd_toEndOf="@+id/editText"
-        app:layout_constraintTop_toTopOf="@+id/editText" />
-
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMovieSearch"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="25dp"
@@ -36,6 +29,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/searchMovie"
+        tools:listitem="@layout/list_search"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
