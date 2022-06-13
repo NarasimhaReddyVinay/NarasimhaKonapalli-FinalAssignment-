@@ -32,7 +32,7 @@ class HomeViewModel(val repository: Repository): ViewModel() {
         }
     }
 
-    fun requestTrending(query:String?) {
+    fun requestTrending() {
         CoroutineScope(Dispatchers.Main).launch{
             val response = repository.getTrending()
             _trendingResponseList.postValue(response.results as ArrayList<PosterTrending>?)

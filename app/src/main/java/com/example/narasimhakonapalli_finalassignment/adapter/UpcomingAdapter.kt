@@ -1,36 +1,35 @@
 package com.example.narasimhakonapalli_finalassignment.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.narasimhakonapalli_finalassignment.R
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.example.narasimhakonapalli_finalassignment.databinding.ListUpcomingBinding
 import com.example.narasimhakonapalli_finalassignment.listener.OnClickItemUpcoming
 import com.example.narasimhakonapalli_finalassignment.model.upcoming.PosterUpcoming
-import com.squareup.picasso.Picasso
+import com.example.narasimhakonapalli_finalassignment.util.Constant
+
 
 class UpcomingAdapter: RecyclerView.Adapter<UpcomingAdapter.UpcomingViewHolder>() {
 
     private var list: MutableList<PosterUpcoming> = mutableListOf()
     var onClickListener: OnClickItemUpcoming? =null
 
-    inner class UpcomingViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+    inner class UpcomingViewHolder(private val binding: ListUpcomingBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(posterUpcoming: PosterUpcoming){
 
 
-            val upcomingMovieTitle: TextView = itemView.findViewById(R.id.txt_title_favorite)
-            val upcomingMoviedate: TextView = itemView.findViewById(R.id.txt_year_favorite)
-            val UpcomingImage = itemView.findViewById<ImageView>(R.id.iv_detail_fav)
+            binding.txtTitleFavorite.text = posterUpcoming.title
 
-            upcomingMovieTitle.text = posterUpcoming.title
-            upcomingMoviedate.text = posterUpcoming.releaseDate
+            binding.txtYearFavorite.text = posterUpcoming.releaseDate
 
-            Picasso.get()
-                .load(posterUpcoming.posterPath)
-                .fit()
-                .into(UpcomingImage)
+            Glide.with(itemView)
+                .load("${Constant.URL_IMAGE}${posterUpcoming.posterPath}")
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .centerCrop()
+                .into(binding.ivDetailFav)
+
 
             itemView.setOnClickListener {
                 onClickListener?.onClick(posterUpcoming)
@@ -39,11 +38,13 @@ class UpcomingAdapter: RecyclerView.Adapter<UpcomingAdapter.UpcomingViewHolder>(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UpcomingViewHolder {
-        val view: View =
-            LayoutInflater.from(parent.context).inflate(R.layout.list_upcoming, parent, false)
-        return UpcomingViewHolder(view)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)= UpcomingViewHolder(
+        ListUpcomingBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+    )
 
     override fun onBindViewHolder(holder: UpcomingViewHolder, position: Int) {
         holder.bind(list[position])

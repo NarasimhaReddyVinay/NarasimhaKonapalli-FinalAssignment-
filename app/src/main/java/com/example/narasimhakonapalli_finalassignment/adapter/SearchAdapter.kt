@@ -1,15 +1,14 @@
 package com.example.narasimhakonapalli_finalassignment.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.narasimhakonapalli_finalassignment.listener.OnClickItemSearch
-import com.example.narasimhakonapalli_finalassignment.R
+import com.example.narasimhakonapalli_finalassignment.databinding.ListSearchBinding
 import com.example.narasimhakonapalli_finalassignment.model.search.SearchMovie
-import com.squareup.picasso.Picasso
+import com.example.narasimhakonapalli_finalassignment.util.Constant
 
 class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
 
@@ -17,18 +16,15 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
     var onClickItemSearch: OnClickItemSearch?= null
 
 
-    inner class SearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    inner class SearchViewHolder(private val binding: ListSearchBinding ) : RecyclerView.ViewHolder(binding.root){
         fun bind(searchMovie: SearchMovie){
 
-            val movieTitle: TextView = itemView.findViewById(R.id.txt_search_title)
-            val movieImage = itemView.findViewById<ImageView>(R.id.iv_search)
-
-
-            movieTitle.text = searchMovie.title
-            Picasso.get()
-                .load(searchMovie.logo_path)
-                .fit()
-                .into(movieImage)
+            binding.txtSearchTitle.text = searchMovie.title
+            Glide.with(itemView)
+                .load("${Constant.URL_IMAGE}${searchMovie.logo_path}")
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .centerCrop()
+                .into(binding.ivSearch)
 
             itemView.setOnClickListener {
                 onClickItemSearch?.onClick(searchMovie)
@@ -36,11 +32,12 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
-        val view: View =
-            LayoutInflater.from(parent.context).inflate(R.layout.list_search, parent, false)
-        return SearchViewHolder(view)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)= SearchViewHolder(
+    ListSearchBinding.inflate(
+        LayoutInflater.from(parent.context),
+        parent,
+        false)
+    )
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
         holder.bind(list[position])

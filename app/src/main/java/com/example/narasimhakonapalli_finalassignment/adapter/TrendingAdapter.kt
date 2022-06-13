@@ -1,29 +1,29 @@
 package com.example.narasimhakonapalli_finalassignment.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.narasimhakonapalli_finalassignment.R
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.example.narasimhakonapalli_finalassignment.databinding.ListTrendingBinding
 import com.example.narasimhakonapalli_finalassignment.listener.OnClickItemTrending
 import com.example.narasimhakonapalli_finalassignment.model.Trending.PosterTrending
-import com.squareup.picasso.Picasso
+import com.example.narasimhakonapalli_finalassignment.util.Constant
 
 class TrendingAdapter: RecyclerView.Adapter<TrendingAdapter.TrendingViewHolder>() {
 
     private var list: MutableList<PosterTrending> = mutableListOf()
     var onClickListener: OnClickItemTrending? =null
 
-    inner class TrendingViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+    inner class TrendingViewHolder(private val binding: ListTrendingBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(posterTrending: PosterTrending){
 
-            val TrendingImage = itemView.findViewById<ImageView>(R.id.iv_trending)
+            Glide.with(itemView)
+                .load("${Constant.URL_IMAGE}${posterTrending.posterPath}")
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .centerCrop()
+                .into(binding.ivTrending)
 
-            Picasso.get()
-                .load(posterTrending.posterPath)
-                .fit()
-                .into(TrendingImage)
 
             itemView.setOnClickListener {
                 onClickListener?.onClick(posterTrending)
@@ -32,11 +32,12 @@ class TrendingAdapter: RecyclerView.Adapter<TrendingAdapter.TrendingViewHolder>(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrendingViewHolder {
-        val view: View =
-            LayoutInflater.from(parent.context).inflate(R.layout.list_trending, parent, false)
-        return TrendingViewHolder(view)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)= TrendingViewHolder(
+        ListTrendingBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,false
+        )
+    )
 
     override fun onBindViewHolder(holder: TrendingViewHolder, position: Int) {
         holder.bind(list[position])

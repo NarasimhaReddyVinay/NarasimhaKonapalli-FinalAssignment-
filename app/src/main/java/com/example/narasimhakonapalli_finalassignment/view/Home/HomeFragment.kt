@@ -12,8 +12,9 @@ import com.example.narasimhakonapalli_finalassignment.adapter.UpcomingAdapter
 import com.example.narasimhakonapalli_finalassignment.data.RepositoryImpl
 import com.example.narasimhakonapalli_finalassignment.databinding.FragmentHomeBinding
 import com.example.narasimhakonapalli_finalassignment.listener.OnClickItemTrending
+import com.example.narasimhakonapalli_finalassignment.listener.OnClickItemUpcoming
 import com.example.narasimhakonapalli_finalassignment.model.Trending.PosterTrending
-
+import com.example.narasimhakonapalli_finalassignment.model.upcoming.PosterUpcoming
 
 
 class HomeFragment : Fragment() {
@@ -26,8 +27,6 @@ class HomeFragment : Fragment() {
     private val adapterUpcoming: UpcomingAdapter by lazy {
         UpcomingAdapter()
     }
-
-
 
 
     private var _binding: FragmentHomeBinding? = null
@@ -56,6 +55,9 @@ class HomeFragment : Fragment() {
         setListUpcoming()
 
 
+        viewModel.requestTrending()
+        viewModel.requestUpcoming()
+
         return binding.root
     }
 
@@ -66,6 +68,13 @@ class HomeFragment : Fragment() {
     }
 
     private fun setListUpcoming() {
+        binding.rvUpcoming.setHasFixedSize(true)
+        binding.rvUpcoming.adapter = adapterUpcoming
+        adapterUpcoming.onClickListener= object : OnClickItemUpcoming{
+            override fun onClick(posterUpcoming: PosterUpcoming) {
+                TODO("Not yet implemented")
+            }
+        }
 
     }
 

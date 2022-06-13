@@ -24,7 +24,8 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
                     android:text="Trending"
-                    android:textSize="16sp" />
+                    android:textColor="@color/black"
+                    android:textSize="26sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_trending"
@@ -47,7 +48,8 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="8dp"
                     android:text="Upcoming Movies"
-                    android:textSize="16sp" />
+                    android:textColor="@color/black"
+                    android:textSize="26sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_upcoming"

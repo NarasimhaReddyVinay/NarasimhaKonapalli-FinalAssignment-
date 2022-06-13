@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class TrendingResponse(
     @SerializedName("results")
-    val results: List<Any>
+    val results: List<PosterTrending>
 )

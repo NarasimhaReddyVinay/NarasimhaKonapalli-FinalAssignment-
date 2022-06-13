@@ -75,11 +75,11 @@ class SearchFragment : Fragment() {
            rvMovieSearch.layoutManager=LinearLayoutManager(requireContext())
            rvMovieSearch.setHasFixedSize(true)
            rvMovieSearch.adapter = adapterSearch
-        }
-        adapterSearch.onClickItemSearch = object : OnClickItemSearch {
+            adapterSearch.onClickItemSearch = object : OnClickItemSearch {
             override fun onClick(searchMovie: SearchMovie){
-
+                TODO("Not yet implemented")
             }
+        }
         }
     }
 
