@@ -18,6 +18,7 @@ class TrendingAdapter: RecyclerView.Adapter<TrendingAdapter.TrendingViewHolder>(
     inner class TrendingViewHolder(private val binding: ListTrendingBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(posterTrending: PosterTrending){
 
+
             Glide.with(itemView)
                 .load("${Constant.URL_IMAGE}${posterTrending.posterPath}")
                 .transition(DrawableTransitionOptions.withCrossFade())

@@ -20,8 +20,9 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
         fun bind(searchMovie: SearchMovie){
 
             binding.txtSearchTitle.text = searchMovie.title
+
             Glide.with(itemView)
-                .load("${Constant.URL_IMAGE}${searchMovie.logo_path}")
+                .load("${Constant.URL_IMAGE}${searchMovie.posterPath}")
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .centerCrop()
                 .into(binding.ivSearch)

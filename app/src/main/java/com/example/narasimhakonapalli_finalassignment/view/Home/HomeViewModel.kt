@@ -5,8 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.narasimhakonapalli_finalassignment.data.Repository
 import com.example.narasimhakonapalli_finalassignment.model.Trending.PosterTrending
-import com.example.narasimhakonapalli_finalassignment.model.Trending.TrendingResponse
-import com.example.narasimhakonapalli_finalassignment.model.search.SearchMovie
 import com.example.narasimhakonapalli_finalassignment.model.upcoming.PosterUpcoming
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,8 +19,6 @@ class HomeViewModel(val repository: Repository): ViewModel() {
     private val _upcomingResponseList = MutableLiveData<ArrayList<PosterUpcoming>>()
     val upcomingResponseList: LiveData<ArrayList<PosterUpcoming>> = _upcomingResponseList
 
-    private val _errorMessage = MutableLiveData<String>()
-    val errorMessage: LiveData<String> = _errorMessage
 
 
     fun requestUpcoming(){

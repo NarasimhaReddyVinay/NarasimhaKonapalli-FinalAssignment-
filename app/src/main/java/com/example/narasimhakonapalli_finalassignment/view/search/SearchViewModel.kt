@@ -14,9 +14,6 @@ class SearchViewModel(val repository: Repository) : ViewModel() {
     private val _searchMovieList = MutableLiveData<ArrayList<SearchMovie>>()
     val searchMovieList: LiveData<ArrayList<SearchMovie>> = _searchMovieList
 
-    private val _errorMessage = MutableLiveData<String>()
-    val errorMessage: LiveData<String> = _errorMessage
-
 
 
     fun requestMovieQuery(query:String?) {

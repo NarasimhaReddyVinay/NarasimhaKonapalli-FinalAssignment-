@@ -1,5 +1,6 @@
 package com.example.narasimhakonapalli_finalassignment.view.Home
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.narasimhakonapalli_finalassignment.view.Details.DetailsActivity
 import com.example.narasimhakonapalli_finalassignment.adapter.TrendingAdapter
 import com.example.narasimhakonapalli_finalassignment.adapter.UpcomingAdapter
 import com.example.narasimhakonapalli_finalassignment.data.RepositoryImpl
@@ -62,9 +64,9 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeUpcoming() {
-        viewModel.upcomingResponseList.observe(viewLifecycleOwner,{
+        viewModel.upcomingResponseList.observe(viewLifecycleOwner) {
             adapterUpcoming.setDataUpcoming(it)
-        })
+        }
     }
 
     private fun setListUpcoming() {
@@ -72,16 +74,16 @@ class HomeFragment : Fragment() {
         binding.rvUpcoming.adapter = adapterUpcoming
         adapterUpcoming.onClickListener= object : OnClickItemUpcoming{
             override fun onClick(posterUpcoming: PosterUpcoming) {
-                TODO("Not yet implemented")
+                navigationToDetailUpcoming(posterUpcoming)
             }
         }
 
     }
 
     private fun observeTrending() {
-        viewModel.trendingResponseList.observe(viewLifecycleOwner,{
+        viewModel.trendingResponseList.observe(viewLifecycleOwner) {
             adapterTrending.setDataTrending(it)
-        })
+        }
     }
 
     private fun setListTrending() {
@@ -89,9 +91,21 @@ class HomeFragment : Fragment() {
         binding.rvTrending.adapter = adapterTrending
         adapterTrending.onClickListener = object : OnClickItemTrending{
             override fun onClick(posterTrending: PosterTrending) {
-                TODO("Not yet implemented")
+                navigationToDetailTrending(posterTrending)
             }
         }
+    }
+
+    private fun navigationToDetailTrending(posterTrending: PosterTrending){
+        val intent = Intent(activity, DetailsActivity::class.java)
+        intent.putExtra("id", posterTrending.id)
+        startActivity(intent)
+    }
+
+    private fun navigationToDetailUpcoming(posterUpcoming: PosterUpcoming){
+        val intent = Intent(activity, DetailsActivity::class.java)
+        intent.putExtra("id", posterUpcoming.id)
+        startActivity(intent)
     }
 
 

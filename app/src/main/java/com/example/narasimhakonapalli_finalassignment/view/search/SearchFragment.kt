@@ -1,5 +1,6 @@
 package com.example.narasimhakonapalli_finalassignment.view.search
 
+import android.content.Intent
 import android.os.Bundle
 
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.narasimhakonapalli_finalassignment.view.Details.DetailsActivity
 import com.example.narasimhakonapalli_finalassignment.listener.OnClickItemSearch
 import com.example.narasimhakonapalli_finalassignment.adapter.SearchAdapter
 import com.example.narasimhakonapalli_finalassignment.data.RepositoryImpl
@@ -65,9 +67,9 @@ class SearchFragment : Fragment() {
     }
 
     private fun observeSearch(){
-        viewModel.searchMovieList.observe(viewLifecycleOwner,{
+        viewModel.searchMovieList.observe(viewLifecycleOwner) {
             adapterSearch.setDataSearch(it)
-        })
+        }
     }
 
     private fun setListSearch(){
@@ -77,10 +79,16 @@ class SearchFragment : Fragment() {
            rvMovieSearch.adapter = adapterSearch
             adapterSearch.onClickItemSearch = object : OnClickItemSearch {
             override fun onClick(searchMovie: SearchMovie){
-                TODO("Not yet implemented")
+                navigationToDetails(searchMovie)
             }
         }
         }
+    }
+
+    private fun navigationToDetails(searchMovie: SearchMovie) {
+        val intent = Intent(activity, DetailsActivity::class.java)
+        intent.putExtra("id", searchMovie.id)
+        startActivity(intent)
     }
 
 

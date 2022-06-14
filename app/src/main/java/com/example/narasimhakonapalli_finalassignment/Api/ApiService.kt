@@ -4,13 +4,16 @@ import com.example.narasimhakonapalli_finalassignment.model.Trending.TrendingRes
 import com.example.narasimhakonapalli_finalassignment.model.search.SearchResponse
 import com.example.narasimhakonapalli_finalassignment.model.upcoming.UpcomingResponse
 import com.example.narasimhakonapalli_finalassignment.util.Constant
+import com.example.narasimhakonapalli_finalassignment.model.cast.CastResponse
+import com.example.narasimhakonapalli_finalassignment.model.details.DetailResponse
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface ApiService {
+interface ApiService{
 
 
     @GET("search/movie")
@@ -33,6 +36,19 @@ interface ApiService {
         @Query("api_key") apiKey: String = Constant.API_KEY,
         @Query("language") lang: String = Constant.LANGUAGE
     ): Response<UpcomingResponse>
+
+    @GET("movie/{cast_id}/credits")
+    fun getCast(
+        @Query("api_key") apiKey: String = Constant.API_KEY,
+        @Query("language") lang: String = Constant.LANGUAGE
+    ): Response<CastResponse>
+
+    @GET("movie/{movie_id}")
+    fun getDetailMovie(
+        @Path("movie_id") id: Int,
+        @Query("api_key") apiKey: String = Constant.API_KEY,
+        @Query("language") lang: String = Constant.LANGUAGE
+    ): Response<DetailResponse>
 
     companion object {
         private var instance: ApiService? = null
