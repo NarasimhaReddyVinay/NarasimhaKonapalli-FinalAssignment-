@@ -4,7 +4,6 @@ import com.example.narasimhakonapalli_finalassignment.model.Trending.TrendingRes
 import com.example.narasimhakonapalli_finalassignment.model.search.SearchResponse
 import com.example.narasimhakonapalli_finalassignment.model.upcoming.UpcomingResponse
 import com.example.narasimhakonapalli_finalassignment.util.Constant
-import com.example.narasimhakonapalli_finalassignment.model.cast.CastResponse
 import com.example.narasimhakonapalli_finalassignment.model.details.DetailResponse
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -35,13 +34,6 @@ interface ApiService{
         @Query("api_key") apiKey: String = Constant.API_KEY,
         @Query("language") lang: String = Constant.LANGUAGE
     ): Response<UpcomingResponse>
-
-    @GET("movie/{cast_id}/credits")
-    fun getCast(
-        @Path("cast_id") cast: Int,
-        @Query("api_key") apiKey: String = Constant.API_KEY,
-        @Query("language") lang: String = Constant.LANGUAGE
-    ): Response<CastResponse>
 
     @GET("movie/{movie_id}")
     fun getDetailMovie(

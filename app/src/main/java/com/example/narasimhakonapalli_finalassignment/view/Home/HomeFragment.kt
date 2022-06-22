@@ -77,7 +77,6 @@ class HomeFragment : Fragment() {
                 navigationToDetailUpcoming(posterUpcoming)
             }
         }
-
     }
 
     private fun observeTrending() {
@@ -107,8 +106,6 @@ class HomeFragment : Fragment() {
         intent.putExtra("id", posterUpcoming.id)
         startActivity(intent)
     }
-
-
 }
 
 

@@ -26,7 +26,6 @@ class MainActivity : AppCompatActivity() {
 
 
         tabs.getTabAt(0)?.setIcon(R.drawable.ic_baseline_home_24)
-        tabs.getTabAt(1)?.setIcon(R.drawable.ic_baseline_favorite_24)
-        tabs.getTabAt(2)?.setIcon(R.drawable.ic_baseline_search_24)
+        tabs.getTabAt(1)?.setIcon(R.drawable.ic_baseline_search_24)
     }
 }

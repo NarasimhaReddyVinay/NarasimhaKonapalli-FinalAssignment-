@@ -39,23 +39,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="16dp">
-
-                <com.google.android.material.checkbox.MaterialCheckBox
-                    android:id="@+id/cb_fav"
-                    android:layout_width="29dp"
-                    android:layout_height="match_parent"
-                    android:button="@drawable/ic_baseline_favorite_24"
-                    android:gravity="center_horizontal"
-                    app:useMaterialThemeColors="false" />
-
-
-            </LinearLayout>
-
             <TextView
                 android:id="@+id/txt_title_detail"
                 android:layout_width="wrap_content"
@@ -63,7 +46,7 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="12dp"
                 android:text="Title Movie"
-                android:textSize="16sp"
+                android:textSize="26sp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -78,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="16dp"
                     android:text="Relese Date"
-                    android:textSize="12sp" />
+                    android:textSize="18sp" />
 
 
                 <TextView
@@ -87,14 +70,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="16dp"
                     android:text="Duration"
-                    android:textSize="12sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/txt_genre_detail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Genre"
-                    android:textSize="12sp" />
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -106,15 +89,8 @@
                 android:layout_marginTop="12dp"
                 android:justificationMode="inter_word"
                 android:text="Descrintion"
-                android:textSize="14sp" />
+                android:textSize="24sp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="12dp"
-                android:text="Cast"
-                android:textSize="16sp" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -122,18 +98,6 @@
                 android:elevation="8dp"
                 app:cardElevation="8dp">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_cast"
-                    android:layout_width="match_parent"
-                    android:layout_height="110dp"
-                    android:layout_marginTop="8dp"
-                    android:paddingHorizontal="16dp"
-                    android:clipToPadding="false"
-                    android:elevation="8dp"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:itemCount="5"
-                    tools:listitem="@layout/list_cast" />
 
             </androidx.cardview.widget.CardView>
 

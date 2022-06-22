@@ -4,7 +4,6 @@ import com.example.narasimhakonapalli_finalassignment.Api.ApiService
 import com.example.narasimhakonapalli_finalassignment.model.Trending.TrendingResponse
 import com.example.narasimhakonapalli_finalassignment.model.search.SearchResponse
 import com.example.narasimhakonapalli_finalassignment.model.upcoming.UpcomingResponse
-import com.example.narasimhakonapalli_finalassignment.model.cast.CastResponse
 import com.example.narasimhakonapalli_finalassignment.model.details.DetailResponse
 
 
@@ -14,8 +13,6 @@ interface Repository{
     suspend fun getTrending(): TrendingResponse
 
     suspend fun getUpcoming(): UpcomingResponse
-
-    suspend fun getCast(id: Int?): CastResponse
 
     suspend fun getDetailMovie(id: Int?): DetailResponse
 }
@@ -58,16 +55,6 @@ class RepositoryImpl(private val Service: ApiService = ApiService.getApiService(
             UpcomingResponse(emptyList())
         }
     }
-
-    override suspend fun getCast(cast: Int?): CastResponse {
-        val response=Service.getCast(cast = cast!!.toInt())
-        return if (response.isSuccessful){
-            response.body()!!
-        }else{
-            CastResponse(emptyList())
-        }
-    }
-
 
 
 }
