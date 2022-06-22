@@ -15,7 +15,6 @@ import retrofit2.http.Query
 
 interface ApiService{
 
-
     @GET("search/movie")
     suspend fun getMovieQuery(
         @Query("query") query: String,
@@ -39,6 +38,7 @@ interface ApiService{
 
     @GET("movie/{cast_id}/credits")
     fun getCast(
+        @Path("cast_id") cast: Int,
         @Query("api_key") apiKey: String = Constant.API_KEY,
         @Query("language") lang: String = Constant.LANGUAGE
     ): Response<CastResponse>
@@ -55,7 +55,7 @@ interface ApiService{
         fun getApiService(): ApiService{
             if (instance == null){
                 instance = Retrofit.Builder()
-                    .baseUrl("https://api.themoviedb.org/3/")
+                    .baseUrl(Constant.BASEURL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
                     .create(ApiService::class.java)

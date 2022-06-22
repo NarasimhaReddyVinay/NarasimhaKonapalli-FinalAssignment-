@@ -6,4 +6,5 @@ object Constant {
     const val PAGE = "1"
     const val INCLUDE_ADULT = "false"
     const val URL_IMAGE = "https://image.tmdb.org/t/p/w500"
+    const val BASEURL ="https://api.themoviedb.org/3/"
 }

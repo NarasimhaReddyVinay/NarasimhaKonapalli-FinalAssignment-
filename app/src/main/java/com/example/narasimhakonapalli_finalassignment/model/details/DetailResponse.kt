@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class DetailResponse(
     @SerializedName("homepage")
-    val results: List<Any>
+    val results: List<GenresDetail>
 )

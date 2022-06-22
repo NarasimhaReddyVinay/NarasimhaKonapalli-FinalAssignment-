@@ -15,7 +15,7 @@ interface Repository{
 
     suspend fun getUpcoming(): UpcomingResponse
 
-    suspend fun getCast(): CastResponse
+    suspend fun getCast(id: Int?): CastResponse
 
     suspend fun getDetailMovie(id: Int?): DetailResponse
 }
@@ -36,7 +36,7 @@ class RepositoryImpl(private val Service: ApiService = ApiService.getApiService(
         return if(response.isSuccessful){
             response.body()!!
         }else{
-            DetailResponse((emptyList()))
+            DetailResponse(emptyList())
         }
     }
 
@@ -59,8 +59,8 @@ class RepositoryImpl(private val Service: ApiService = ApiService.getApiService(
         }
     }
 
-    override suspend fun getCast(): CastResponse {
-        val response=Service.getCast()
+    override suspend fun getCast(cast: Int?): CastResponse {
+        val response=Service.getCast(cast = cast!!.toInt())
         return if (response.isSuccessful){
             response.body()!!
         }else{

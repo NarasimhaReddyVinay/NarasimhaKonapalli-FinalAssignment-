@@ -24,6 +24,12 @@ class UpcomingAdapter: RecyclerView.Adapter<UpcomingAdapter.UpcomingViewHolder>(
 
             binding.txtYearFavorite.text = posterUpcoming.releaseDate
 
+
+            val rating = posterUpcoming.rating
+            binding.ratingBar.numStars = 5
+            binding.ratingBar.stepSize = 0.5f
+            binding.ratingBar.rating = rating/2
+
             Glide.with(itemView)
                 .load("${Constant.URL_IMAGE}${posterUpcoming.posterPath}")
                 .transition(DrawableTransitionOptions.withCrossFade())
