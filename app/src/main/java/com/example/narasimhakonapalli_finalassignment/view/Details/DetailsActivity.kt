@@ -48,6 +48,7 @@ class DetailsActivity : AppCompatActivity() {
             finish()
         }
     }
+
     private fun observeDetailMovie(){
         viewModel.detailResponse.observe(this, {
             loadPoster(it)
@@ -55,8 +56,6 @@ class DetailsActivity : AppCompatActivity() {
 
         })
     }
-
-
 
     private fun loadPoster(detailResponse: DetailResponse) {
         Glide.with(this)
@@ -71,8 +70,8 @@ class DetailsActivity : AppCompatActivity() {
         binding.txtReleaseDetail.text = detailResponse.releaseDate
         binding.txtGenreDetail.text = detailResponse.genres?.map { it?.name }!!.joinToString("-")
         binding.txtDescriptionDetail.text = detailResponse.overview
+        binding.txtDurationDetail.text =  detailResponse.runtime.toString()+" Minutes"
     }
-
 
 }
 
