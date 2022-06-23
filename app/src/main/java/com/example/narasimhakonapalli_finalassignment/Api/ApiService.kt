@@ -36,7 +36,7 @@ interface ApiService{
     ): Response<UpcomingResponse>
 
     @GET("movie/{movie_id}")
-    fun getDetailMovie(
+    suspend fun getDetailMovie(
         @Path("movie_id") id: Int,
         @Query("api_key") apiKey: String = Constant.API_KEY,
         @Query("language") lang: String = Constant.LANGUAGE

@@ -12,19 +12,20 @@ import kotlinx.coroutines.launch
 
 class DetailsViewModle( val repository: Repository) : ViewModel() {
 
-    private val _detailResponse = MutableLiveData<ArrayList<DetailResponse>>()
-    val detailResponse: LiveData<ArrayList<DetailResponse>> = _detailResponse
+    private val _detailResponse = MutableLiveData<DetailResponse>()
+    val detailResponse: LiveData<DetailResponse> = _detailResponse
 
 
 
     fun requestDetailMovie(id: Int) {
         CoroutineScope(Dispatchers.Main).launch {
             val response = repository.getDetailMovie(id)
-            _detailResponse.postValue(response.results as ArrayList<DetailResponse>)
+            _detailResponse.postValue(response.copy())
         }
     }
 
 }
+
 
 
 

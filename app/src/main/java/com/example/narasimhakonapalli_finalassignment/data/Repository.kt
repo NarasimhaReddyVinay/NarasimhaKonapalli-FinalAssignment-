@@ -14,7 +14,7 @@ interface Repository{
 
     suspend fun getUpcoming(): UpcomingResponse
 
-    suspend fun getDetailMovie(id: Int?): DetailResponse
+    suspend fun getDetailMovie(id: Int): DetailResponse
 }
 
 class RepositoryImpl(private val Service: ApiService = ApiService.getApiService()): Repository
@@ -28,14 +28,6 @@ class RepositoryImpl(private val Service: ApiService = ApiService.getApiService(
         }
     }
 
-    override suspend fun getDetailMovie(id: Int?): DetailResponse {
-        val response=Service.getDetailMovie(id = id!!.toInt())
-        return if(response.isSuccessful){
-            response.body()!!
-        }else{
-            DetailResponse(emptyList())
-        }
-    }
 
 
     override suspend fun getTrending(): TrendingResponse {
@@ -53,6 +45,15 @@ class RepositoryImpl(private val Service: ApiService = ApiService.getApiService(
             response.body()!!
         }else{
             UpcomingResponse(emptyList())
+        }
+    }
+
+    override suspend fun getDetailMovie(id: Int): DetailResponse {
+        val response=Service.getDetailMovie(id = id.toInt())
+        return if(response.isSuccessful){
+            response.body()!!
+        }else{
+            DetailResponse()
         }
     }
 
